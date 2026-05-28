@@ -240,7 +240,17 @@ function renderSvgToPng(svgFile, pngFile, width, height) {
     return;
   }
 
-  execFileSync("magick", ["-background", "none", svgFile, "-resize", `${width}x${height}`, pngFile]);
+  if (hasCommand("magick")) {
+    execFileSync("magick", ["-background", "none", svgFile, "-resize", `${width}x${height}`, pngFile]);
+    return;
+  }
+
+  if (hasCommand("convert")) {
+    execFileSync("convert", ["-background", "none", svgFile, "-resize", `${width}x${height}`, pngFile]);
+    return;
+  }
+
+  throw new Error("No SVG renderer found. Install librsvg2-bin or ImageMagick.");
 }
 
 function hasCommand(name) {
