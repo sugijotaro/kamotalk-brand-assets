@@ -36,6 +36,7 @@ jobs:
         run: |
           identify assets/logo/png/kamotalk-symbol-square.png | grep "1024x1024"
           identify assets/logo/png/kamotalk-symbol-square-transparent.png | grep "1024x1024"
+          identify assets/logo/png/kamotalk-symbol.png | grep "475x438"
           identify assets/logo/png/kamotalk-logo-horizontal.png | grep "1116x256"
           identify assets/logo/png/kamotalk-wordmark-stacked.png | grep "494x288"
           identify assets/logo/png/kamotalk-wordmark.png | grep "845x139"

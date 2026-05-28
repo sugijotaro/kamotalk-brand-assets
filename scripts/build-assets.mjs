@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-import { execFileSync } from "node:child_process";
-import { mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { execFileSync, spawnSync } from "node:child_process";
+import { existsSync, mkdirSync, readFileSync, rmSync, renameSync, writeFileSync } from "node:fs";
 import { mkdtemp, readdir } from "node:fs/promises";
 import { basename, dirname, extname, join, resolve } from "node:path";
 import { tmpdir } from "node:os";
@@ -12,6 +12,12 @@ const releaseDir = join(rootDir, "build/release");
 const releaseAssetsDir = join(releaseDir, "kamotalk-brand-assets");
 
 const pngExports = [
+  {
+    svg: "kamotalk-symbol.svg",
+    png: "kamotalk-symbol.png",
+    width: 475,
+    height: 438,
+  },
   {
     svg: "kamotalk-symbol-square.svg",
     png: "kamotalk-symbol-square.png",
@@ -43,6 +49,14 @@ const pngExports = [
     width: 845,
     height: 139,
   },
+];
+
+const releaseSvgFiles = [
+  "kamotalk-logo-horizontal.svg",
+  "kamotalk-symbol-square.svg",
+  "kamotalk-symbol.svg",
+  "kamotalk-wordmark-stacked.svg",
+  "kamotalk-wordmark.svg",
 ];
 
 const command = process.argv[2];
@@ -81,8 +95,11 @@ async function exportPngs() {
       if (target.transparentBackground) {
         svg = removeSquareBackground(svg);
       }
+      const tempPng = join(tempDir, target.png);
+      const outputPng = join(pngDir, target.png);
       writeFileSync(tempSvg, svg);
-      renderSvgToPng(tempSvg, join(pngDir, target.png), target.width, target.height);
+      renderSvgToPng(tempSvg, tempPng, target.width, target.height);
+      replacePngIfChanged(tempPng, outputPng);
     }
   } finally {
     rmSync(tempDir, { recursive: true, force: true });
@@ -94,7 +111,7 @@ async function buildReleasePackage() {
   mkdirSync(join(releaseAssetsDir, "svg"), { recursive: true });
   mkdirSync(join(releaseAssetsDir, "png"), { recursive: true });
 
-  for (const svgName of await listSvgFiles()) {
+  for (const svgName of releaseSvgFiles) {
     writeFileSync(join(releaseAssetsDir, "svg", svgName), inlineSvg(join(svgDir, svgName)));
   }
 
@@ -105,7 +122,7 @@ async function buildReleasePackage() {
   }
 
   writeFileSync(join(releaseAssetsDir, ".nojekyll"), "");
-  writeFileSync(join(releaseAssetsDir, "index.html"), createIndexHtml(await listSvgFiles()));
+  writeFileSync(join(releaseAssetsDir, "index.html"), createIndexHtml(releaseSvgFiles));
 
   execFileSync("zip", ["-r", "kamotalk-brand-assets.zip", "kamotalk-brand-assets"], {
     cwd: releaseDir,
@@ -318,6 +335,26 @@ function renderSvgToPng(svgFile, pngFile, width, height) {
   }
 
   throw new Error("No SVG renderer found. Install librsvg2-bin or ImageMagick.");
+}
+
+function replacePngIfChanged(tempPng, outputPng) {
+  if (existsSync(outputPng) && pngPixelsMatch(tempPng, outputPng)) {
+    return;
+  }
+
+  renameSync(tempPng, outputPng);
+}
+
+function pngPixelsMatch(leftPng, rightPng) {
+  if (hasCommand("compare")) {
+    const result = spawnSync("compare", ["-metric", "AE", leftPng, rightPng, "null:"], {
+      encoding: "utf8",
+    });
+    const metric = `${result.stdout || ""}${result.stderr || ""}`.trim();
+    return result.status === 0 && (metric === "0" || metric === "0 (0)");
+  }
+
+  return readFileSync(leftPng).equals(readFileSync(rightPng));
 }
 
 function hasCommand(name) {
