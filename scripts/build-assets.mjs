@@ -104,10 +104,77 @@ async function buildReleasePackage() {
     execFileSync("cp", [join(pngDir, target.png), join(releaseAssetsDir, "png", target.png)]);
   }
 
+  writeFileSync(join(releaseAssetsDir, ".nojekyll"), "");
+  writeFileSync(join(releaseAssetsDir, "index.html"), createIndexHtml(await listSvgFiles()));
+
   execFileSync("zip", ["-r", "kamotalk-brand-assets.zip", "kamotalk-brand-assets"], {
     cwd: releaseDir,
     stdio: "inherit",
   });
+}
+
+function createIndexHtml(svgFiles) {
+  const pngFiles = pngExports.map((target) => target.png);
+  const svgLinks = svgFiles.map((file) => assetLink("svg", file)).join("\n");
+  const pngLinks = pngFiles.map((file) => assetLink("png", file)).join("\n");
+
+  return `<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>KamoTalk Brand Assets</title>
+    <style>
+      body {
+        margin: 40px;
+        color: #14332c;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.5;
+      }
+
+      main {
+        max-width: 760px;
+      }
+
+      h1 {
+        margin: 0 0 24px;
+        font-size: 28px;
+      }
+
+      h2 {
+        margin: 32px 0 12px;
+        font-size: 18px;
+      }
+
+      ul {
+        padding-left: 20px;
+      }
+
+      a {
+        color: #1f7d69;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>KamoTalk Brand Assets</h1>
+      <p>Release用に生成されたSVGとPNGです。SVG内の参照はすべてインライン展開済みです。</p>
+      <h2>SVG</h2>
+      <ul>
+${svgLinks}
+      </ul>
+      <h2>PNG</h2>
+      <ul>
+${pngLinks}
+      </ul>
+    </main>
+  </body>
+</html>
+`;
+}
+
+function assetLink(directory, file) {
+  return `        <li><a href="${directory}/${file}">${file}</a></li>`;
 }
 
 async function listSvgFiles() {

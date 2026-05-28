@@ -2,17 +2,16 @@ name: Release assets
 
 on:
   push:
-    tags:
-      - "v*"
+    branches:
+      - main
   workflow_dispatch:
-    inputs:
-      tag:
-        description: "Release tag to create, for example v1.0.0"
-        required: true
-        type: string
 
 permissions:
   contents: write
+
+concurrency:
+  group: release-assets-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   release:
@@ -31,14 +30,15 @@ jobs:
       - name: Build release package
         run: node scripts/build-assets.mjs release-package
 
-      - name: Resolve release tag
+      - name: Create release tag
         id: release_tag
         run: |
-          if [ "${{ github.ref_type }}" = "tag" ]; then
-            echo "tag=${{ github.ref_name }}" >> "$GITHUB_OUTPUT"
-          else
-            echo "tag=${{ inputs.tag }}" >> "$GITHUB_OUTPUT"
-          fi
+          tag="release-$(TZ=Asia/Tokyo date +'%Y%m%d-%H%M%S')"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git tag "$tag" "$GITHUB_SHA"
+          git push origin "$tag"
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
 
       - name: Create GitHub release
         env:
@@ -50,3 +50,11 @@ jobs:
             --title "KamoTalk Brand Assets $RELEASE_TAG" \
             --generate-notes \
             --target "$GITHUB_SHA"
+
+      - name: Publish GitHub Pages branch
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ github.token }}
+          publish_branch: gh-pages
+          publish_dir: build/release/kamotalk-brand-assets
+          force_orphan: true
