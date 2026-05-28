@@ -227,6 +227,16 @@ function escapeAttr(value) {
 }
 
 function renderSvgToPng(svgFile, pngFile, width, height) {
+  if (hasCommand("magick")) {
+    execFileSync("magick", ["-background", "none", svgFile, "-resize", `${width}x${height}`, pngFile]);
+    return;
+  }
+
+  if (hasCommand("convert")) {
+    execFileSync("convert", ["-background", "none", svgFile, "-resize", `${width}x${height}`, pngFile]);
+    return;
+  }
+
   if (hasCommand("rsvg-convert")) {
     execFileSync("rsvg-convert", [
       "--format=png",
@@ -237,16 +247,6 @@ function renderSvgToPng(svgFile, pngFile, width, height) {
       pngFile,
       svgFile,
     ]);
-    return;
-  }
-
-  if (hasCommand("magick")) {
-    execFileSync("magick", ["-background", "none", svgFile, "-resize", `${width}x${height}`, pngFile]);
-    return;
-  }
-
-  if (hasCommand("convert")) {
-    execFileSync("convert", ["-background", "none", svgFile, "-resize", `${width}x${height}`, pngFile]);
     return;
   }
 
