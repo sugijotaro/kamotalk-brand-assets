@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg id="kamotalk-wordmark-stacked" data-name="KamoTalk Wordmark Stacked" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 494 280" role="img" aria-labelledby="title desc">
+<svg id="kamotalk-wordmark-stacked" data-name="KamoTalk Wordmark Stacked" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 494 288" role="img" aria-labelledby="title desc">
   <title id="title">KamoTalk stacked wordmark</title>
   <desc id="desc">Two-line KamoTalk wordmark with Kamo above Talk.</desc>
   <g id="wordmark" data-name="Wordmark">
     <image id="wordmark-kamo" data-name="Wordmark Kamo" href="kamotalk-wordmark-kamo.svg" x="0" y="0" width="492" height="139"/>
-    <image id="wordmark-talk" data-name="Wordmark Talk" href="kamotalk-wordmark-talk.svg" x="70" y="149" width="345" height="139"/>
+    <image id="wordmark-talk" data-name="Wordmark Talk" href="kamotalk-wordmark-talk.svg" x="70" y="145" width="345" height="139"/>
   </g>
 </svg>
