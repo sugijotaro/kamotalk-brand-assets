@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="kamotalk-wordmark-talk" data-name="Talk Wordmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 -4 345 139" role="img" aria-labelledby="title desc">
+  <title id="title">Talk wordmark</title>
+  <desc id="desc">Talk portion of the KamoTalk wordmark.</desc>
+  <defs>
+    <style>
+      .brand-green {
+        fill: #30a083;
+      }
+    </style>
+  </defs>
+  <path id="t" data-name="T" class="brand-green" transform="translate(-336 -768)" d="M336 775 Q336 772 339 772 L431 772 Q434 772 434 775 L434 793 Q434 796 431 796 L397 796 L397 893 Q397 896 394 896 L374 896 Q371 896 371 893 L371 796 L339 796 Q336 796 336 793 Z"/>
+  <path id="a" data-name="A" class="brand-green" transform="translate(-336 -768)" fill-rule="evenodd" d="M482 802 C507 802 521 815 521 837 L522 893 Q522 896 519 896 L502 896 Q499 896 499 893 L498 886 C490 895 479 899 465 899 C445 899 433 889 433 873 C433 856 446 847 472 843 L497 840 C497 828 491 822 478 822 C469 822 462 826 459 834 L442 834 Q438 834 439 830 C443 812 459 802 482 802 Z M497 856 L477 859 C464 861 458 866 459 873 C460 880 467 883 478 881 C489 879 497 870 497 858 Z"/>
+  <path id="l" data-name="L" class="brand-green" transform="translate(-336 -768)" d="M546 775 Q546 772 549 772 L567 772 Q570 772 570 775 L570 893 Q570 896 567 896 L549 896 Q546 896 546 893 Z"/>
+  <path id="k" data-name="K" class="brand-green" transform="translate(-336 -768)" d="M594 775 Q594 772 597 772 L615 772 Q618 772 618 775 L618 840 L654 805 Q655 804 657 804 L678 804 Q682 804 679 808 L647 842 Q645 845 647 848 L681 892 Q684 896 679 896 L654 896 Q652 896 650 894 L622 858 Q620 856 618 858 L618 893 Q618 896 615 896 L597 896 Q594 896 594 893 Z"/>
+</svg>

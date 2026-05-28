@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="kamotalk-wordmark-kamo" data-name="Kamo Wordmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 -4 492 139" role="img" aria-labelledby="title desc">
+  <title id="title">Kamo wordmark</title>
+  <desc id="desc">Kamo portion of the KamoTalk wordmark.</desc>
+  <defs>
+    <style>
+      .brand-green {
+        fill: #30a083;
+      }
+    </style>
+  </defs>
+  <path id="k" data-name="K" class="brand-green" transform="translate(-266 -615)" d="M266 622 Q266 619 269 619 L288 619 Q291 619 291 622 L291 672 L342 620 Q343 619 345 619 L370 619 Q373 619 371 622 L319 678 L372 740 Q374 744 369 744 L343 744 Q341 744 339 742 L300 694 L291 703 L291 741 Q291 744 288 744 L269 744 Q266 744 266 741 Z"/>
+  <path id="a" data-name="A" class="brand-green" transform="translate(-266 -615)" fill-rule="evenodd" d="M425 648 C452 648 469 662 469 686 L469 741 Q469 744 466 744 L451 744 Q447 744 447 740 L447 734 C439 742 428 746 414 746 C393 746 381 735 381 717 C381 699 394 690 421 687 L445 684 C445 673 438 668 426 668 C416 668 409 672 406 681 L389 681 Q385 681 386 677 C390 659 405 648 425 648 Z M445 702 L426 704 C412 706 405 710 405 718 C405 726 412 730 423 728 C436 726 445 716 445 704 Z"/>
+  <path id="m" data-name="M" class="brand-green" transform="translate(-266 -615)" d="M494 654 Q494 651 497 651 L515 651 Q518 651 518 654 L518 662 C525 653 535 648 548 648 C562 648 572 654 578 664 C586 653 598 648 612 648 C632 648 641 662 641 689 L641 741 Q641 744 638 744 L619 744 Q616 744 616 741 L616 690 C616 678 611 671 601 671 C588 671 580 680 580 693 L580 741 Q580 744 577 744 L559 744 Q556 744 556 741 L556 690 C556 678 551 671 541 671 C527 671 518 681 518 695 L518 741 Q518 744 515 744 L497 744 Q494 744 494 741 Z"/>
+  <path id="o" data-name="O" class="brand-green" transform="translate(-266 -615)" fill-rule="evenodd" d="M709 648 C739 648 758 667 758 697 C758 727 739 746 709 746 C679 746 660 727 660 697 C660 667 679 648 709 648 Z M709 671 C693 671 683 681 683 697 C683 713 693 724 709 724 C725 724 735 713 735 697 C735 681 725 671 709 671 Z"/>
+</svg>
