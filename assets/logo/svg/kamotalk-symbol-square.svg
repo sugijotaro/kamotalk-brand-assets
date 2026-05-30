@@ -9,11 +9,11 @@
       }
 
       .brand-green {
-        fill: #30a083;
+        fill: #2eb08e;
       }
 
       .duck-orange {
-        fill: #e9a350;
+        fill: #fcab4d;
       }
     </style>
   </defs>

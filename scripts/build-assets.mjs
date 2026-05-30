@@ -144,7 +144,7 @@ function createIndexHtml(svgFiles) {
     <style>
       body {
         margin: 40px;
-        color: #14332c;
+        color: #133830;
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         line-height: 1.5;
       }
@@ -168,7 +168,7 @@ function createIndexHtml(svgFiles) {
       }
 
       a {
-        color: #1f7d69;
+        color: #1e8972;
       }
     </style>
   </head>
